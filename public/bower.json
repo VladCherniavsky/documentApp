@@ -1,0 +1,13 @@
+{
+  "name": "shorterlinks",
+  "description": "shorterlinks",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.6",
+    "angular-messages": "~1.4.8",
+    "angular-growl-v2": "~0.7.9"
+  }
+}

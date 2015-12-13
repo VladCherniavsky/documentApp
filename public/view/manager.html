@@ -1,0 +1,72 @@
+<div class="userPageH1">
+    <h4 class="bg-success">
+        Welcome to your page, {{manager.userName}}!<br>
+        Your position: {{manager.userPosition}}!
+    </h4>
+</div>
+<form name="managerForm" class="form-horizontal bg-warning adminPage" novalidate ng-submit="manager.addNewDocument(newDocument, managerForm.$valid)">
+    <h1>Create new document</h1>
+    <div class="form-group">
+        <label for="inputnumber" class="col-sm-2 control-label">Number:</label>
+        <div class="col-sm-10">
+            <input type="text" name="number" class="form-control" id="inputnumber" placeholder="number" required ng-minlength="3" ng-maxlength="30" ng-model="newDocument.numberDocument">
+            <div class="error"  ng-messages="managerForm.number.$error" ng-show="registrationUserForm.username.$touched||registrationUserForm.$submitted">
+                <div ng-messages-include="my-valid-messages"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="kindDocument" class="col-sm-2 control-label">Kind document: </label>
+        <div class="col-sm-10">
+            <input type="text" name="kindDocument" class="form-control" id="kindDocument" placeholder="kindDocument" required ng-minlength="3" ng-maxlength="30" ng-model="newDocument.kindDocument">
+
+            <div class="error" ng-messages="managerForm.kindDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
+                <div ng-messages-include="my-valid-messages"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="typeDocument" class="col-sm-2 control-label">Type document: </label>
+        <div class="col-sm-10">
+            <input type="text" name="typeDocument" class="form-control" id="typeDocument" placeholder="Position" required ng-model="newDocument.typeDocument">
+
+            <div class="error" ng-messages="managerForm.typeDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
+                <div ng-messages-include="my-valid-messages"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pathDocument" class="col-sm-2 control-label">Path document: </label>
+        <div class="col-sm-10">
+            <input type="text" name="pathDocument" class="form-control" id="pathDocument" placeholder="pathDocument" required ng-model="newDocument.pathDocument">
+
+            <div class="error" ng-messages="managerForm.pathDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
+                <div ng-messages-include="my-valid-messages"></div>
+            </div>
+        </div>
+    </div>
+    <button type="submit"  class="btn btn-primary btn-block">Loading document</button>
+    <div growl></div>
+</form>
+<label>Search: <input ng-model="searchText"></label>
+<h3>All documents:</h3>
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+    <tr>
+        <th>Number document</th>
+        <th>Kind document</th>
+        <th>Type document</th>
+        <th>Delete</th>
+        <th>Download</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="document in manager.documents | filter: searchText">
+        <td>{{document.numberDocument}}</td>
+        <td class="overAuto">{{document.kindDocument}}</td>
+        <td class="overAuto">{{document.typeDocument}}</td>
+        <td><a ng-click="manager.deleteDocument(document._id)">Delete</a></td>
+        <td><a ng-click="manager.downloadDocument(document.pathDocument)">Download</a></td>
+    </tr>
+    </tbody>
+</table>

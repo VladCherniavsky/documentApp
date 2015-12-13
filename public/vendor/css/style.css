@@ -1,0 +1,83 @@
+/*validation*/
+form .ng-invalid-required.ng-dirty {
+    background-color: #ffe9e6;
+}
+
+form .ng-invalid-email.ng-dirty {
+    background-color: lightgoldenrodyellow;
+}
+
+form .ng-valid.ng-dirty {
+    background-color: #d7eed3;
+}
+
+span.summary.ng-invalid {
+    color: red;
+    font-weight: bold;
+}
+
+span.summary.ng-valid {
+    color: green;
+}
+
+div.error {
+    color: red;
+    font-weight: bold;
+}
+/*validation*/
+/*pagination*/
+.container {
+    margin-top: 20px;
+}
+.pagination {
+    display: inline-block;
+}
+.pagination:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.pagination li {
+    cursor: pointer;
+}
+.pagination-wrap {
+    text-align: center;
+}
+/*pagination*/
+form{
+    margin: 20px 0 20px 0;
+    padding: 20px 10px 20px 10px;
+    border-radius: 10px;
+}
+form h3{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+form label{
+    margin-left: 3px;
+}
+button.btn{
+    vertical-align: bottom;
+}
+.userPageH1{
+    text-align: right;
+}
+.userPageH1 h4{
+    text-align: center;
+    width: 300px;
+    padding: 20px 0 20px 0;
+    border-radius: 10px;
+    display: inline-block;
+}
+td{
+    max-width: 240px;
+    overflow: auto;
+}
+form.bg-warning{
+    padding: 45px;
+    width: 500px;
+    margin-left: 315px;
+}
+a{
+    cursor: pointer;
+}

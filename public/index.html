@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="document">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Documents</title>
+
+    <link rel="stylesheet" href="vendor/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="vendor/bower_components/angular-growl-v2/build/angular-growl.min.css">
+    <link rel="stylesheet" href="vendor/css/style.css">
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default" ng-controller="mainCtrl">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" ng-show="checkUserAuthBtn()" ui-sref="userPage">User page</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-hide="checkUserAuthBtn()" ui-sref="loginUser">Login</a></li>
+                    <li><a ng-show="checkUserAuthBtn()" ng-click="userLogout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div ui-view></div>
+</div>
+<script src="vendor/bower_components/angular/angular.min.js"></script>
+<script src="vendor/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="vendor/bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="vendor/bower_components/angular-growl-v2/build/angular-growl.min.js"></script>
+<script src="app.js"></script>
+<script src="user/controllers/runPage.js"></script>
+<script src="user/controllers/userLoginCtrl.js"></script>
+<script src="user/controllers/adminCtrl.js"></script>
+<script src="user/controllers/editUser.js"></script>
+<script src="user/controllers/directorCtrl.js"></script>
+<script src="user/controllers/staffCtrl.js"></script>
+<script src="user/controllers/managerCtrl.js"></script>
+<script src="user/routes/routes.js"></script>
+<script src="user/services/sessionUserService.js"></script>
+<script src="user/services/userLoginService.js"></script>
+<script src="user/services/adminService.js"></script>
+<script src="user/services/directorService.js"></script>
+
+<script type="text/ng-template" id="my-valid-messages">
+    <div ng-message="required">You did not enter a field</div>
+    <div ng-message="minlength">Your field is too short</div>
+    <div ng-message="maxlength">Your field is too long</div>
+</script>
+</body>
+</html>
