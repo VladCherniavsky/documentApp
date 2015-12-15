@@ -19,7 +19,7 @@
         <label for="kindDocument" class="col-sm-2 control-label">Kind document: </label>
         <div class="col-sm-10">
 
-            <!--<select type="text" name="kindDocument" class="form-control" id="kindDocument" placeholder="kindDocument" required ng-minlength="3" ng-maxlength="30" ng-model="newDocument.kindDocumentnewDocument.kindDocument">-->
+            <!-- <input type="text" name="kindDocument" class="form-control" id="kindDocument" placeholder="kindDocument" required ng-minlength="3" ng-maxlength="30" ng-model="newDocument.kindDocumentnewDocument.kindDocument"/> -->
             <select class="form-control" ng-model="newDocument.kindDocument" ng-options="item for item in director.documentKinds"></select>
             <div class="error" ng-messages="directorForm.kindDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
                 <div ng-messages-include="my-valid-messages"></div>
@@ -30,6 +30,11 @@
         <label for="typeDocument" class="col-sm-2 control-label">Type document: </label>
         <div class="col-sm-10">
             <input type="text" name="typeDocument" class="form-control" id="typeDocument" placeholder="Position" required ng-model="newDocument.typeDocument">
+            admin<input type="checkbox" ng-model="director.Vis.admin" ng-click="director.addRemoveVis('admin', director.Vis.admin)"/>
+            manager<input type="checkbox" ng-model="director.Vis.manager" ng-click="director.addRemoveVis('manager', director.Vis.manager)"/>
+            director<input type="checkbox" ng-model="director.Vis.dir" ng-click="director.addRemoveVis('director', director.Vis.dir)"/>
+            staff<input type="checkbox" ng-model="director.Vis.staff" ng-click="director.addRemoveVis('staff', director.Vis.staff)"/>
+           
 
             <div class="error" ng-messages="directorForm.typeDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
                 <div ng-messages-include="my-valid-messages"></div>
@@ -39,10 +44,11 @@
     <div class="form-group">
         <label for="pathDocument" class="col-sm-2 control-label">Path document: </label>
         <div class="col-sm-10">
-            <input type="file" file-model="myFile"  name="pathDocument" class="form-control" id="pathDocument" placeholder="pathDocument" required ng-model="newDocument.pathDocument">
-
-            <div class="error" ng-messages="directorForm.pathDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
-                <div ng-messages-include="my-valid-messages"></div>
+          <!--  <input type="file" class="button" ng-model="newDocument.fileTo" /> -->
+           <input type="file" file-model="myFile"/>
+           <button ng-click="director.uploadFile()">upload me</button>
+           
+                
             </div>
         </div>
     </div>
@@ -63,11 +69,11 @@
     </thead>
     <tbody>
     <tr ng-repeat="document in director.documents | filter: searchText">
-        <td>{{document.numberDocument}}</td>
-        <td class="overAuto">{{document.kindDocument}}</td>
-        <td class="overAuto">{{document.typeDocument}}</td>
-        <td><a ng-click="director.deleteDocument(document._id)">Delete</a></td>
-        <td><a ng-click="director.downloadDocument(document.pathDocument)">Download</a></td>
+        <td ng-hide="document.visibility.indexOf(director.userPosition)<0">{{document.numberDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(director.userPosition)<0" class="overAuto">{{document.kindDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(director.userPosition)<0" class="overAuto">{{document.typeDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(director.userPosition)<0"><a ng-click="director.deleteDocument(document._id)">Delete</a></td>
+        <td ng-hide="document.visibility.indexOf(director.userPosition)<0"><a ng-click="director.downloadDocument(document.pathDocument)">Download</a></td>
     </tr>
     </tbody>
 </table>

@@ -7,6 +7,9 @@
     function adminCtrl (adminService, $state, $log, growl, $rootScope) {
         var self = this;
 
+
+
+
         this.addNewUser = function (newUser, isvalid) {
             if (isvalid) {
                 $log.info(newUser);
@@ -30,6 +33,41 @@
 
         this.userName = $rootScope.userSession.userName;
         this.userPosition = $rootScope.userSession.access;
+
+
+        this.Vis={
+            admin:false,
+            manager:false,
+            staff:false,
+            dir:false
+        };
+
+        this.visibilityDoc=[];
+        this.addRemoveVis=function(val,bool){
+           
+             console.log(val);
+             console.log(bool);
+            if(bool){
+                var index=this.visibilityDoc.indexOf(val);
+                if(index > -1){
+
+                }
+                else{
+                    this.visibilityDoc.push(val);
+                    console.log( this.visibilityDoc);
+                }
+            }
+            else{
+                 var index=this.visibilityDoc.indexOf(val);
+                 console.log(index)
+                 if(index > -1){
+                    this.visibilityDoc.splice(index);
+                    console.log( this.visibilityDoc);
+                 }
+            }
+
+        }
+        
 
         function allUsers(){
             adminService.getAllUsers().then(function(users){

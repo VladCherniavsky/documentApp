@@ -2,33 +2,82 @@
 (function () {
     angular
         .module('document')
-        .controller('directorCtrl',['$log','$state','directorService','$rootScope','growl', directorCtrl])
-        .directive('fileModel', ['$parse', function ($parse) {
-            return {
-                restrict: 'A',
-                link: function(scope, element, attrs) {
-                    var model = $parse(attrs.fileModel);
-                    var modelSetter = model.assign;
+        .controller('directorCtrl',['$log','$state','directorService','$rootScope','growl','Upload', directorCtrl]);
+      
 
-                    element.bind('change', function(){
-                        scope.$apply(function(){
-                            modelSetter(scope, element[0].files[0]);
-                        });
-                    });
-                }
-            };
-        }]);
+       
+        
 
-    function directorCtrl($log, $state, directorService, $rootScope, growl){
+    function directorCtrl($log, $state, directorService, $rootScope,$scope, growl){
         this.userName = $rootScope.userSession.userName;
         this.userPosition = $rootScope.userSession.access;
+        this.Vis={
+            admin:false,
+            manager:false,
+            staff:false,
+            dir:false
+        };
+
+        this.visibilityDoc=[];
+        this.addRemoveVis=function(val,bool){
+           
+             console.log(val);
+             console.log(bool);
+            if(bool){
+                var index=this.visibilityDoc.indexOf(val);
+                if(index > -1){
+
+                }
+                else{
+                    this.visibilityDoc.push(val);
+                    console.log( this.visibilityDoc);
+                }
+            }
+            else{
+                 var index=this.visibilityDoc.indexOf(val);
+                 console.log(index)
+                 if(index > -1){
+                    this.visibilityDoc.splice(index);
+                    console.log( this.visibilityDoc);
+                 }
+            }
+
+        }
+  
+
         this.documentKinds= ['item 1', 'item 2', 'item 3'];
+        this.uploadFile = function(){
+            var file = this.myFile;
+            console.log('file is ' );
+            console.dir(file);
+            /*var uploadUrl = "/fileUpload";
+            fileUpload.uploadFileToUrl(file, uploadUrl);*/
+        };
+
+
+        
+
+
+
+
+        /*this.upload = function (file) {
+            console.log(file);
+            this.fileToUpload=file;
+             console.log(this.fileToUpload);
+      
+    };*/
+   
+
+
+
+       
 
         var self = this;
 
         function allDocuments(){
             directorService.getAllDocuments().then(function(documents){
                 self.documents = documents;
+                console.log(self.documents);
             }).catch(function(rej){
                 $log.debug('userPageCtrl: getAllUserLinks ERROR');
                 $log.debug(rej);
@@ -46,8 +95,16 @@
                 $log.debug(rej);
             });
         };
-        this.addNewDocument = function (newDocument, isvalid) {
+        this.addNewDocument = function (newDocument, isvalid) {           
+              
+
+             
+
+
+
+    
             if (isvalid) {
+              newDocument.visibilityArray=this.visibilityDoc;
                 $log.info(newDocument);
                 directorService.creatDocument(newDocument).then(function(){
                     allDocuments();

@@ -9,6 +9,40 @@
         this.userPosition = $rootScope.userSession.access;
         var self = this;
 
+this.Vis={
+            admin:false,
+            manager:false,
+            staff:false,
+            dir:false
+        };
+
+        this.visibilityDoc=[];
+        this.addRemoveVis=function(val,bool){
+           
+             console.log(val);
+             console.log(bool);
+            if(bool){
+                var index=this.visibilityDoc.indexOf(val);
+                if(index > -1){
+
+                }
+                else{
+                    this.visibilityDoc.push(val);
+                    console.log( this.visibilityDoc);
+                }
+            }
+            else{
+                 var index=this.visibilityDoc.indexOf(val);
+                 console.log(index)
+                 if(index > -1){
+                    this.visibilityDoc.splice(index);
+                    console.log( this.visibilityDoc);
+                 }
+            }
+
+        }
+
+
         function allDocuments(){
             directorService.getAllDocuments().then(function(documents){
                 self.documents = documents;
@@ -31,6 +65,7 @@
         };
         this.addNewDocument = function (newDocument, isvalid) {
             if (isvalid) {
+                newDocument.visibilityArray=this.visibilityDoc;
                 $log.info(newDocument);
                 directorService.creatDocument(newDocument).then(function(){
                     allDocuments();

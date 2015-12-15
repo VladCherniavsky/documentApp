@@ -30,6 +30,11 @@
         <div class="col-sm-10">
             <input type="text" name="typeDocument" class="form-control" id="typeDocument" placeholder="Position" required ng-model="newDocument.typeDocument">
 
+              admin<input type="checkbox" ng-model="staff.Vis.admin" ng-click="staff.addRemoveVis('admin', staff.Vis.admin)"/>
+            manager<input type="checkbox" ng-model="staff.Vis.manager" ng-click="staff.addRemoveVis('manager', staff.Vis.manager)"/>
+            director<input type="checkbox" ng-model="staff.Vis.dir" ng-click="staff.addRemoveVis('director', staff.Vis.dir)"/>
+            staff<input type="checkbox" ng-model="staff.Vis.staff" ng-click="staff.addRemoveVis('staff', staff.Vis.staff)"/>
+
             <div class="error" ng-messages="staffForm.typeDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
                 <div ng-messages-include="my-valid-messages"></div>
             </div>
@@ -62,11 +67,11 @@
     </thead>
     <tbody>
     <tr ng-repeat="document in staff.documents | filter: searchText">
-        <td>{{document.numberDocument}}</td>
-        <td class="overAuto">{{document.kindDocument}}</td>
-        <td class="overAuto">{{document.typeDocument}}</td>
-        <td><a ng-click="staff.deleteDocument(document._id)">Delete</a></td>
-        <td><a ng-click="staff.downloadDocument(document.pathDocument)">Download</a></td>
+        <td ng-hide="document.visibility.indexOf(staff.userPosition)<0">{{document.numberDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(staff.userPosition)<0" class="overAuto">{{document.kindDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(staff.userPosition)<0" class="overAuto">{{document.typeDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(staff.userPosition)<0"><a ng-click="staff.deleteDocument(document._id)">Delete</a></td>
+        <td ng-hide="document.visibility.indexOf(staff.userPosition)<0"><a ng-click="staff.downloadDocument(document.pathDocument)">Download</a></td>
     </tr>
     </tbody>
 </table>

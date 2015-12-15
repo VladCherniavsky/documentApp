@@ -1,5 +1,5 @@
 'use strict';
-angular.module('document', ['ui.router','ngMessages','angular-growl'])
+angular.module('document', ['ui.router','ngMessages','angular-growl','ngFileUpload'])
     .controller('mainCtrl',['$scope', 'sessionUserService','$log','$rootScope','$state', mainCtrl])
     .config(['growlProvider', growlProvider ]);
 

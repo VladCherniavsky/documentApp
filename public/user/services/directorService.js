@@ -29,6 +29,9 @@
             });
         };
         this.creatDocument = function (document) {
+              /*var fd = new FormData();
+            fd.append('file', file);
+            fd.append('data', document);*/
             return $http({
                 method: 'POST',
                 url: '/api/document',

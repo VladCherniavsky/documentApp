@@ -5,13 +5,18 @@ var log = require('../libs/log')(module),
 
 exports.addDocument = function (req, res, next) {
 
+   
+
         var document = new documentModel({
             userId: req.session.passport.user,
             numberDocument: req.body.numberDocument,
             kindDocument: req.body.kindDocument,
             typeDocument: req.body.typeDocument,
-            pathDocument: req.body.pathDocument
+            pathDocument: null,
+            visibility:req.body.visibilityArray
         });
+         console.log(document);
+
         document.save(function (err) {
             if (err) {
                 return next(err);

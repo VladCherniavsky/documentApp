@@ -21,11 +21,15 @@ var document = new Schema({
     },
     pathDocument:{
         type: String,
-        required: true
+        required: false
     },
     dateCreated: {
         type: Date,
         default: Date.now
+    },
+    visibility :{
+        type: [],
+        required: false
     }
 });
 

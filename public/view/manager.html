@@ -30,6 +30,12 @@
         <div class="col-sm-10">
             <input type="text" name="typeDocument" class="form-control" id="typeDocument" placeholder="Position" required ng-model="newDocument.typeDocument">
 
+
+             admin<input type="checkbox" ng-model="manager.Vis.admin" ng-click="manager.addRemoveVis('admin', manager.Vis.admin)"/>
+            manager<input type="checkbox" ng-model="manager.Vis.manager" ng-click="manager.addRemoveVis('manager', manager.Vis.manager)"/>
+            director<input type="checkbox" ng-model="manager.Vis.dir" ng-click="manager.addRemoveVis('director', manager.Vis.dir)"/>
+            staff<input type="checkbox" ng-model="manager.Vis.staff" ng-click="manager.addRemoveVis('staff', manager.Vis.staff)"/>
+
             <div class="error" ng-messages="managerForm.typeDocument.$error" ng-show="registrationUserForm.password.$touched||registrationUserForm.$submitted">
                 <div ng-messages-include="my-valid-messages"></div>
             </div>
@@ -62,11 +68,11 @@
     </thead>
     <tbody>
     <tr ng-repeat="document in manager.documents | filter: searchText">
-        <td>{{document.numberDocument}}</td>
-        <td class="overAuto">{{document.kindDocument}}</td>
-        <td class="overAuto">{{document.typeDocument}}</td>
-        <td><a ng-click="manager.deleteDocument(document._id)">Delete</a></td>
-        <td><a ng-click="manager.downloadDocument(document.pathDocument)">Download</a></td>
+        <td ng-hide="document.visibility.indexOf(manager.userPosition)<0">{{document.numberDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(manager.userPosition)<0"class="overAuto">{{document.kindDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(manager.userPosition)<0"class="overAuto">{{document.typeDocument}}</td>
+        <td ng-hide="document.visibility.indexOf(manager.userPosition)<0"><a ng-click="manager.deleteDocument(document._id)">Delete</a></td>
+        <td ng-hide="document.visibility.indexOf(manager.userPosition)<0"><a ng-click="manager.downloadDocument(document.pathDocument)">Download</a></td>
     </tr>
     </tbody>
 </table>
